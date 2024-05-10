@@ -106,11 +106,13 @@ void Batalha(Treinador treinadores[2])
     {
       printf("%s venceu %s\n", treinador2->Pokemons[j].Nome, treinador1->Pokemons[i].Nome);
       i++;
+      treinador1->PokemonsVivos--;
     }
     if (treinador2->Pokemons[j].Vida <= 0)
     {
       printf("%s venceu %s\n", treinador1->Pokemons[i].Nome, treinador2->Pokemons[j].Nome);
       j++;
+      treinador2->PokemonsVivos--;
     }
   }
 
