@@ -26,7 +26,7 @@ void getSuperEfetividade(Pokemon *pokemon)
       strcpy(super, contraTipos[i]);
     }
   }
-
+  memcpy(pokemon->SuperEfetivo, super, sizeof(super));
 }
 
 Treinador *lerTreinadores(const char nomeArq[])
