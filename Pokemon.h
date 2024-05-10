@@ -5,9 +5,9 @@
 
 typedef struct {
   char Nome[100];
-  int Ataque;
-  int Defesa;
-  int Vida;
+  float Ataque;
+  float Defesa;
+  float Vida;
   char Tipo[7]; // Maior palavra deveria ser Elétrico
   char SuperEfetivo[7];
 } Pokemon;

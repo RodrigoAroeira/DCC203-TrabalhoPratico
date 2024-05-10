@@ -52,14 +52,14 @@ Treinador *lerTreinadores(const char nomeArq[])
   for (int i = 0; i < treinador1->PokemonsTotal; i++)
   {
     pokemonPtr = &treinador1->Pokemons[i];
-    fscanf(arquivoP, "%s %d %d %d %s", pokemonPtr->Nome, &pokemonPtr->Ataque, &pokemonPtr->Defesa, &pokemonPtr->Vida, pokemonPtr->Tipo);
+    fscanf(arquivoP, "%s %f %f %f %s", pokemonPtr->Nome, &pokemonPtr->Ataque, &pokemonPtr->Defesa, &pokemonPtr->Vida, pokemonPtr->Tipo);
     getSuperEfetividade(pokemonPtr);
   }
 
   for (int i = 0; i < treinador2->PokemonsTotal; i++)
   {
     pokemonPtr = &treinador2->Pokemons[i];
-    fscanf(arquivoP, "%s %d %d %d %s", pokemonPtr->Nome, &pokemonPtr->Ataque, &pokemonPtr->Defesa, &pokemonPtr->Vida, pokemonPtr->Tipo);
+    fscanf(arquivoP, "%s %f %f %f %s", pokemonPtr->Nome, &pokemonPtr->Ataque, &pokemonPtr->Defesa, &pokemonPtr->Vida, pokemonPtr->Tipo);
     getSuperEfetividade(pokemonPtr);
   }
 
@@ -89,21 +89,22 @@ int main1(int argc, char *argv[])
 
   for (int i = 0; i < 2; i++)
   {
-    printf("Treinador %d\n", i+1);
+    printf("Treinador %d\n", i + 1);
     Treinador *treinador = &treinadores[i];
     for (size_t i = 0; i < treinador->PokemonsTotal; i++)
     {
       Pokemon *pokemon = &treinador->Pokemons[i];
       puts("-----------------");
       printf("Nome: %s\n", pokemon->Nome);
-      printf("Ataque: %d\n", pokemon->Ataque);
-      printf("Defesa: %d\n", pokemon->Defesa);
-      printf("Vida: %d\n", pokemon->Vida);
+      printf("Ataque: %f\n", pokemon->Ataque);
+      printf("Defesa: %f\n", pokemon->Defesa);
+      printf("Vida: %f\n", pokemon->Vida);
       printf("Tipo: %s\n", pokemon->Tipo);
+      printf("Super Efetivo contra: %s\n", pokemon->SuperEfetivo);
       puts("-----------------");
     }
   }
 
-  free(treinadores);
+  limparTreinadores(treinadores);
   return EXIT_SUCCESS;
 }
