@@ -3,18 +3,19 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 
-typedef struct {
+typedef struct
+{
   char Nome[100];
   float Ataque;
   float Defesa;
   float Vida;
-  char Tipo[7]; // Maior palavra deveria ser Elétrico
-  char SuperEfetivo[7];
+  char Tipo[20]; // Maior palavra deveria ser Elétrico
+  char SuperEfetivo[20];
 } Pokemon;
 
-
-typedef struct {
-  Pokemon* Pokemons;
+typedef struct
+{
+  Pokemon *Pokemons;
   int PokemonsTotal;
   int PokemonsVivos;
   bool vencedor;
