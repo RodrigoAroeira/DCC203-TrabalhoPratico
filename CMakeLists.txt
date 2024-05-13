@@ -6,7 +6,7 @@ enable_testing()
 
 include_directories(..)
 
-add_executable(TP 
+add_executable(TP.exe 
 main.c
 func.c
 Pokemon.c
