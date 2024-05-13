@@ -28,22 +28,6 @@ void Atacar(Pokemon *ataque, Pokemon *defesa)
   defesa->Vida -= dano;
 }
 
-int acharVencedor(Treinador *treinador1, Treinador *treinador2)
-{
-  int vencedor;
-  if (treinador1->PokemonsVivos == 0)
-  {
-    treinador2->vencedor = true;
-    vencedor = 2;
-  }
-  else if (treinador2->PokemonsVivos == 0)
-  {
-    treinador1->vencedor = true;
-    vencedor = 1;
-  }
-  return vencedor;
-}
-
 void setVencedor(Treinador treinadores[2])
 {
   for (int i = 0; i < 2; i++)
