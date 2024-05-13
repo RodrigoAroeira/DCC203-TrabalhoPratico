@@ -14,12 +14,6 @@ typedef struct {
 
 
 typedef struct {
-  const char* tipo;
-  const char* fraqueza;
-  const char* resistencia;
-} Efetividade;
-
-typedef struct {
   Pokemon* Pokemons;
   int PokemonsTotal;
   int PokemonsVivos;
