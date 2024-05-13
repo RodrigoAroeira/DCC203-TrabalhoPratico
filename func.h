@@ -7,4 +7,6 @@ Treinador* lerTreinadores(const char nomeArq[]);
 
 void limparTreinadores(Treinador treinadores[2]);
 
+void printTreinadores();
+
 #endif // FUNC_H
