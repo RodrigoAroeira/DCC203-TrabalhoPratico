@@ -45,11 +45,13 @@ float ataqueMultiplier(Pokemon *ataque, Pokemon *defesa)
 
 void Atacar(Pokemon *ataque, Pokemon *defesa)
 {
-  float dano = ataque->Ataque - defesa->Defesa;
   float multiplier = ataqueMultiplier(ataque, defesa);
-  if (dano <= 0){
-    dano = 1;}
-  defesa->Vida -= dano * multiplier;
+  float dano = ataque->Ataque * multiplier - defesa->Defesa;
+  if (dano <= 0)
+  {
+    dano = 1;
+  }
+  defesa->Vida -= dano;
 }
 
 int acharVencedor(Treinador *treinador1, Treinador *treinador2)
