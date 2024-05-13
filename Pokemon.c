@@ -70,20 +70,48 @@ int acharVencedor(Treinador *treinador1, Treinador *treinador2)
   return vencedor;
 }
 
-void printSobreviventes(Treinador *vencedor)
+void setVencedor(Treinador treinadores[2])
 {
-  printf("Pokemons sobreviventes:\n");
-  for (int i = 0; i < vencedor->PokemonsTotal; i++)
+  for (int i = 0; i < 2; i++)
   {
-    Pokemon *pokemon = &vencedor->Pokemons[i];
-    if (pokemon->Vida > 0)
+    if (treinadores[i].PokemonsVivos == 0)
     {
-      printf("%s sobreviveu\n", pokemon->Nome);
+      treinadores[i].vencedor = false;
     }
+    else
+      treinadores[i].vencedor = true;
   }
 }
 
-void printDerrotados(Treinador treinadores[2]){}
+void printOverview(Treinador treinadores[2])
+{
+  for (int i = 0; i < 2; i++)
+  {
+    if (treinadores[i].vencedor)
+    {
+      printf("Jogador %d venceu\n", i + 1);
+      printf("Pokemons sobreviventes:\n");
+      for (int j = 0; j < treinadores[i].PokemonsTotal; j++)
+      {
+        if (treinadores[i].Pokemons[j].Vida > 0)
+        {
+          printf("%s\n", treinadores[i].Pokemons[j].Nome);
+        }
+      }
+    }
+  }
+  printf("Pokemons derrotados:\n");
+  for (int i = 0; i < 2; i++)
+  {
+    for (int j = 0; j < treinadores[i].PokemonsTotal; j++)
+    {
+      if (treinadores[i].Pokemons[j].Vida <= 0)
+      {
+        printf("%s\n", treinadores[i].Pokemons[j].Nome);
+      }
+    }
+  }
+}
 
 void Batalha(Treinador treinadores[2])
 {
