@@ -40,7 +40,7 @@ Treinador *lerTreinadores(const char nomeArq[])
 
   if (arquivoP == NULL)
   {
-    printf("Falha ao abrir o arquivo, tente novamente.\n");
+    printf("Falha ao abrir o arquivo '%s', tente novamente.\n", nomeArq);
     exit(1);
   }
 
