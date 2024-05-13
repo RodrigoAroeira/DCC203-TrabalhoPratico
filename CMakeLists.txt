@@ -4,8 +4,6 @@ project(TP VERSION 0.1.0 LANGUAGES C)
 include(CTest)
 enable_testing()
 
-include_directories(..)
-
 add_executable(TP.exe 
 main.c
 utils.c
