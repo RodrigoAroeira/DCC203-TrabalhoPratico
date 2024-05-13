@@ -1,5 +1,5 @@
 #include "Pokemon.h"
-#include "func.h"
+#include "utils.h"
 
 int main(int argc, char const *argv[])
 {

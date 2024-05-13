@@ -8,7 +8,7 @@ include_directories(..)
 
 add_executable(TP.exe 
 main.c
-func.c
+utils.c
 Pokemon.c
 )
 
