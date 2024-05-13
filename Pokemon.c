@@ -130,11 +130,19 @@ void Batalha(Treinador treinadores[2])
     pokemonPtr2 = &treinador2->Pokemons[j];
 
     Atacar(pokemonPtr1, pokemonPtr2);
-    Atacar(pokemonPtr2, pokemonPtr1);
 
-    if (treinador1->Pokemons[i].Vida <= 0)
+    if (pokemonPtr2->Vida <= 0)
     {
-      printf("%s venceu %s\n", treinador2->Pokemons[j].Nome, treinador1->Pokemons[i].Nome);
+      printf("%s venceu %s\n", pokemonPtr1->Nome, pokemonPtr2->Nome);
+      j++;
+      treinador2->PokemonsVivos--;
+      continue;
+    }
+
+    Atacar(pokemonPtr2, pokemonPtr1);
+    if (pokemonPtr1->Vida <= 0)
+    {
+      printf("%s venceu %s\n", pokemonPtr2->Nome, pokemonPtr1->Nome);
       i++;
       treinador1->PokemonsVivos--;
     }
