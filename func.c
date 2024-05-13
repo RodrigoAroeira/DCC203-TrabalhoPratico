@@ -77,7 +77,7 @@ void limparTreinadores(Treinador treinadores[2])
   free(treinadores);
 }
 
-int main1(int argc, char *argv[])
+int printTreinadores(int argc, char *argv[])
 {
   Treinador *treinadores;
   treinadores = lerTreinadores("treinadores.txt");
