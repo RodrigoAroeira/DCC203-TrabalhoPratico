@@ -43,29 +43,36 @@ void setVencedor(Treinador treinadores[2])
 
 void printOverview(Treinador treinadores[2])
 {
+  Treinador *treinadorPtr;
+  Pokemon *pokemonPtr;
   for (int i = 0; i < 2; i++)
   {
-    if (treinadores[i].vencedor)
+    treinadorPtr = &treinadores[i];
+    if (treinadorPtr->vencedor)
     {
       printf("Jogador %d venceu\n", i + 1);
       printf("Pokemons sobreviventes:\n");
-      for (int j = 0; j < treinadores[i].PokemonsTotal; j++)
+      for (int j = 0; j < treinadorPtr->PokemonsTotal; j++)
       {
-        if (treinadores[i].Pokemons[j].Vida > 0)
+        pokemonPtr = &treinadorPtr->Pokemons[j];
+        if (pokemonPtr->Vida > 0)
         {
-          printf("%s\n", treinadores[i].Pokemons[j].Nome);
+          printf("%s\n", pokemonPtr->Nome);
         }
       }
     }
   }
+
   printf("Pokemons derrotados:\n");
   for (int i = 0; i < 2; i++)
   {
-    for (int j = 0; j < treinadores[i].PokemonsTotal; j++)
+    treinadorPtr = &treinadores[i];
+    for (int j = 0; j < treinadorPtr->PokemonsTotal; j++)
     {
-      if (treinadores[i].Pokemons[j].Vida <= 0)
+      pokemonPtr = &treinadorPtr->Pokemons[j];
+      if (pokemonPtr->Vida <= 0)
       {
-        printf("%s\n", treinadores[i].Pokemons[j].Nome);
+        printf("%s\n", pokemonPtr->Nome);
       }
     }
   }
