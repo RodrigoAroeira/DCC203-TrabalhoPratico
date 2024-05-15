@@ -6,6 +6,12 @@
 
 void setupTreinador(Treinador *treinadorPtr, int qtdPokemons)
 {
+  if (qtdPokemons <= 0 || qtdPokemons > 100)
+  {
+    printf("Quantidade de Pokemons '%d' inválida, tente novamente.\n", qtdPokemons);
+    exit(1);
+  }
+  
   treinadorPtr->PokemonsTotal = qtdPokemons;
   treinadorPtr->PokemonsVivos = qtdPokemons;
   treinadorPtr->Pokemons = (Pokemon *)malloc(qtdPokemons * sizeof(Pokemon));
