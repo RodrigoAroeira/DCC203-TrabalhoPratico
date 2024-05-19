@@ -21,18 +21,16 @@ void setupTreinador(Treinador *treinadorPtr, int qtdPokemons)
 void getSuperEfetividade(Pokemon *pokemon)
 {
   char *tipo = pokemon->Tipo;
-  
+
   char *tipos[5] = {"elétrico", "água", "fogo", "gelo", "pedra"};
   char *contraTipos[5] = {"água", "fogo", "gelo", "pedra", "elétrico"};
-  char super[20];
   for (int i = 0; i < 5; i++)
   {
     if (strcmp(tipo, tipos[i]) == 0)
     {
-      strcpy(super, contraTipos[i]);
+      strcpy(pokemon->SuperEfetivo, contraTipos[i]);
     }
   }
-  memcpy(pokemon->SuperEfetivo, super, sizeof(super));
 }
 
 Treinador *lerTreinadores(const char nomeArq[])
