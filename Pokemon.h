@@ -1,7 +1,6 @@
+#pragma once
 #include <stdbool.h>
 
-#ifndef POKEMON_H
-#define POKEMON_H
 
 typedef struct
 {
@@ -9,7 +8,7 @@ typedef struct
   float Ataque;
   float Defesa;
   float Vida;
-  char Tipo[20]; // Maior palavra deveria ser Elétrico
+  char Tipo[20]; 
   char SuperEfetivo[20];
 } Pokemon;
 
@@ -24,5 +23,3 @@ typedef struct
 void Atacar(Pokemon *pokemon1, Pokemon *pokemon2);
 
 void Batalha(Treinador treinadores[2]);
-
-#endif // POKEMON_H
