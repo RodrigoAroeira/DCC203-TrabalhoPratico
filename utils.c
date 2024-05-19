@@ -11,7 +11,7 @@ void setupTreinador(Treinador *treinadorPtr, int qtdPokemons)
     printf("Quantidade de Pokemons '%d' inválida, tente novamente.\n", qtdPokemons);
     exit(1);
   }
-  
+
   treinadorPtr->PokemonsTotal = qtdPokemons;
   treinadorPtr->PokemonsVivos = qtdPokemons;
   treinadorPtr->Pokemons = (Pokemon *)malloc(qtdPokemons * sizeof(Pokemon));
@@ -81,17 +81,8 @@ void limparTreinadores(Treinador treinadores[2])
   free(treinadores);
 }
 
-
-// Função de debug de leitura de arquivo
-int printTreinadores()
+int printTreinadores(Treinador treinadores[2])
 {
-  Treinador *treinadores;
-  treinadores = lerTreinadores("treinadores.txt");
-  if (treinadores == NULL)
-  {
-    printf("Falha ao ler treinadores.\n");
-    exit(1);
-  }
 
   for (int i = 0; i < 2; i++)
   {
@@ -110,7 +101,4 @@ int printTreinadores()
       puts("-----------------");
     }
   }
-
-  limparTreinadores(treinadores);
-  return EXIT_SUCCESS;
 }
