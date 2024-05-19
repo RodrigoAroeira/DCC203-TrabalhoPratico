@@ -8,6 +8,7 @@ add_executable(TP.exe
 main.c
 utils.c
 Pokemon.c
+CLIParse.c
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
