@@ -10,7 +10,7 @@ float ataqueMultiplier(Pokemon *ataque, Pokemon *defesa)
   {
     multiplier = 1.2;
   }
-  if (strcmp(defesa->SuperEfetivo, ataque->Tipo) == 0)
+  else if (strcmp(defesa->SuperEfetivo, ataque->Tipo) == 0)
   {
     multiplier = 0.8;
   }
@@ -83,31 +83,29 @@ void Batalha(Treinador treinadores[2])
   Treinador *treinador1 = &treinadores[0];
   Treinador *treinador2 = &treinadores[1];
 
-  Pokemon *pokemonPtr1, *pokemonPtr2;
-
   int i = 0, j = 0;
+
+  Pokemon *pokemonPtr1 = &treinador1->Pokemons[i];
+  Pokemon *pokemonPtr2 = &treinador2->Pokemons[j];
 
   while (i < treinador1->PokemonsTotal && j < treinador2->PokemonsTotal)
   {
-    pokemonPtr1 = &treinador1->Pokemons[i];
-    pokemonPtr2 = &treinador2->Pokemons[j];
 
     Atacar(pokemonPtr1, pokemonPtr2);
 
     if (pokemonPtr2->Vida <= 0)
     {
       printf("%s venceu %s\n", pokemonPtr1->Nome, pokemonPtr2->Nome);
-      j++;
       treinador2->PokemonsVivos--;
-      continue;
+      pokemonPtr2 = &treinador2->Pokemons[++j];
     }
 
     Atacar(pokemonPtr2, pokemonPtr1);
     if (pokemonPtr1->Vida <= 0)
     {
       printf("%s venceu %s\n", pokemonPtr2->Nome, pokemonPtr1->Nome);
-      i++;
       treinador1->PokemonsVivos--;
+      pokemonPtr1 = &treinador1->Pokemons[++i];
     }
   }
   setVencedor(treinadores);
