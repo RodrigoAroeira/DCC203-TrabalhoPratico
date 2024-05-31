@@ -22,13 +22,14 @@ void getSuperEfetividade(Pokemon *pokemon)
 {
   char *tipo = pokemon->Tipo;
 
-  char *tipos[5] = {"elétrico", "água", "fogo", "gelo", "pedra"};
-  char *contraTipos[5] = {"água", "fogo", "gelo", "pedra", "elétrico"};
+  char *tipos[5] = {"eletrico", "agua", "fogo", "gelo", "pedra"};
+  char *contraTipos[5] = {"agua", "fogo", "gelo", "pedra", "eletrico"};
   for (int i = 0; i < 5; i++)
   {
     if (strcmp(tipo, tipos[i]) == 0)
     {
       strcpy(pokemon->SuperEfetivo, contraTipos[i]);
+      return;
     }
   }
 }
