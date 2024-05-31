@@ -20,6 +20,4 @@ typedef struct
   bool vencedor;
 } Treinador;
 
-void Atacar(Pokemon *pokemon1, Pokemon *pokemon2);
-
 void Batalha(Treinador treinadores[2]);
