@@ -7,19 +7,7 @@
 #include "Pokemon.h"
 #include "utils.h"
 
-
-
-
-static struct option long_options[] = {
-    {"help", no_argument, 0, 'h'},
-    {"exemplo", no_argument, 0, 'e'},
-    {"custom", required_argument, 0, 'c'},
-    {"print", no_argument, 0, 'p'},
-    {0, 0, 0, 0}
-};
-
-
-
+extern struct option long_options[];
 
 int main(int argc, char* const* argv)
 {
@@ -45,6 +33,10 @@ int main(int argc, char* const* argv)
         case 'p':
             printFlag = true;
             batalhaFlag = false;
+            break;
+        case 'i':
+            printInstruct("instrucoes.txt");
+            return 0;
         default:
             break;
         }
@@ -52,12 +44,12 @@ int main(int argc, char* const* argv)
 
     Treinador *treinadores;
     treinadores = lerTreinadores(arquivo);
+
     if (printFlag)
         printTreinadores(treinadores);
 
-    if (batalhaFlag) 
+    if (batalhaFlag)
         Batalha(treinadores);
-    
 
     limparTreinadores(treinadores);
     return 0;
