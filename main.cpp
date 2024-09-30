@@ -1,4 +1,3 @@
-#include <array>
 #include <getopt.h>
 #include <string>
 

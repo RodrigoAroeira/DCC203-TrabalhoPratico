@@ -3,7 +3,6 @@
 #include "pokemon.hpp"
 
 #include <array>
-#include <iostream>
 #include <vector>
 
 class Treinador {
