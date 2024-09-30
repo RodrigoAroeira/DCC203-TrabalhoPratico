@@ -44,6 +44,10 @@ def Batalha(treinadores: dupla) -> None:
             print(f"{pokemon1.nome} venceu {pokemon2.nome}")
             treinador2.pokemons_vivos -= 1
             j += 1
+
+            if not treinador2.pokemons_vivos:
+                break
+
             pokemon2 = treinador2.pokemons[j]
 
         pokemon2.atacar(pokemon1)
@@ -51,6 +55,10 @@ def Batalha(treinadores: dupla) -> None:
             print(f"{pokemon2.nome} venceu {pokemon1.nome}")
             treinador1.pokemons_vivos -= 1
             i += 1
+
+            if not treinador1.pokemons_vivos:
+                break
+
             pokemon1 = treinador1.pokemons[i]
 
     set_vencedor(treinadores)
