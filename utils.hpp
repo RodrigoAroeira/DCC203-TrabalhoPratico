@@ -4,4 +4,4 @@
 #include <array>
 #include <string>
 
-std::array<Treinador, 2> lerTreinadores(const std::string);
+std::array<Treinador, 2> lerTreinadores(const std::string nomeArq);
