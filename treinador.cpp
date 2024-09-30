@@ -53,40 +53,35 @@ void Batalha(std::array<Treinador, 2> &treinadores) {
 
   int i = 0, j = 0;
 
-  std::cout << "Before: " << std::endl;
-  printAll(treinadores);
-
   while (i < treinador1.pokemonsTotal && j < treinador2.pokemonsTotal) {
-    Pokemon &pokemon1 = treinador1.pokemons[i];
-    Pokemon &pokemon2 = treinador2.pokemons[j];
+    Pokemon *pokemon1 = &treinador1.pokemons[i];
+    Pokemon *pokemon2 = &treinador2.pokemons[j];
 
-    pokemon1.Atacar(pokemon2);
-    if (pokemon2.getVida() <= 0) {
-      std::cout << pokemon1.getNome() << " venceu " << pokemon2.getNome()
+    pokemon1->Atacar(*pokemon2);
+    if (pokemon2->getVida() <= 0) {
+      std::cout << pokemon1->getNome() << " venceu " << pokemon2->getNome()
                 << std::endl;
       treinador2.pokemonsVivos--;
       j++;
       if (j < treinador2.pokemonsTotal) {
-        pokemon2 = treinador2.pokemons[j];
+        pokemon2 = &(treinador2.pokemons[j]);
       } else
         break; // Exit if no more Pokémon are left for treinador2
     }
 
-    pokemon2.Atacar(pokemon1);
-    if (pokemon1.getVida() <= 0) {
-      std::cout << pokemon2.getNome() << " venceu " << pokemon1.getNome()
+    pokemon2->Atacar(*pokemon1);
+    if (pokemon1->getVida() <= 0) {
+      std::cout << pokemon2->getNome() << " venceu " << pokemon1->getNome()
                 << std::endl;
       treinador1.pokemonsVivos--;
       i++;
       if (i < treinador1.pokemonsTotal) {
-        pokemon1 = treinador1.pokemons[i];
+        pokemon1 = &(treinador1.pokemons[i]);
       } else
         break; // Exit if no more Pokémon are left for treinador1
     }
   }
 
-  // setVencedor(treinadores);
-  // printOverview(treinadores);
-  std::cout << "After: " << std::endl;
-  printAll(treinadores);
+  setVencedor(treinadores);
+  printOverview(treinadores);
 }
