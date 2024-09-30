@@ -5,10 +5,6 @@
 
 class Pokemon {
 public:
-  Pokemon(const Pokemon &) = delete;
-  Pokemon(Pokemon &&) = delete;
-  Pokemon &operator=(const Pokemon &) = delete;
-  Pokemon &operator=(Pokemon &&) = delete;
   Pokemon(std::string nome, float ataque, float defesa, float vida,
           std::string tipo)
       : nome(std::move(nome)), ataque(ataque), defesa(defesa), vida(vida),
