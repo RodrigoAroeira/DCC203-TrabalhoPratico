@@ -39,11 +39,18 @@ void printOverview(std::array<Treinador, 2> &treinadores) {
   }
 }
 
-void printAll(const std::array<Treinador, 2> &t) {
-  for (auto &trein : t) {
-    for (auto &pok : trein.pokemons) {
-      std::cout << pok << "hp" << std::endl;
-    }
+void processarAtaque(Pokemon *atacante, Pokemon *defesa, int &indiceDefesa,
+                     Treinador &treinadorDefesa) {
+
+  atacante->Atacar(*defesa);
+
+  if (defesa->getVida() <= 0) {
+    std::cout << atacante->getNome() << " venceu " << defesa->getNome()
+              << std::endl;
+    treinadorDefesa.pokemonsVivos--;
+    indiceDefesa++;
+    if (indiceDefesa < treinadorDefesa.pokemonsTotal)
+      defesa = &(treinadorDefesa.pokemons[indiceDefesa]);
   }
 }
 
@@ -53,35 +60,19 @@ void Batalha(std::array<Treinador, 2> &treinadores) {
 
   int i = 0, j = 0;
 
-  while (i < treinador1.pokemonsTotal && j < treinador2.pokemonsTotal) {
+  while (true) {
     Pokemon *pokemon1 = &treinador1.pokemons[i];
     Pokemon *pokemon2 = &treinador2.pokemons[j];
 
-    pokemon1->Atacar(*pokemon2);
-    if (pokemon2->getVida() <= 0) {
-      std::cout << pokemon1->getNome() << " venceu " << pokemon2->getNome()
-                << std::endl;
-      treinador2.pokemonsVivos--;
-      j++;
-      if (j < treinador2.pokemonsTotal) {
-        pokemon2 = &(treinador2.pokemons[j]);
-      } else
-        break; // Exit if no more Pokémon are left for treinador2
-    }
+    processarAtaque(pokemon1, pokemon2, j, treinador2);
 
-    pokemon2->Atacar(*pokemon1);
-    if (pokemon1->getVida() <= 0) {
-      std::cout << pokemon2->getNome() << " venceu " << pokemon1->getNome()
-                << std::endl;
-      treinador1.pokemonsVivos--;
-      i++;
-      if (i < treinador1.pokemonsTotal) {
-        pokemon1 = &(treinador1.pokemons[i]);
-      } else
-        break; // Exit if no more Pokémon are left for treinador1
-    }
+    if (j >= treinador2.pokemonsTotal)
+      break; // Exit if no more Pokémon are left for treinador2
+
+    processarAtaque(pokemon2, pokemon1, i, treinador1);
+    if (i >= treinador1.pokemonsTotal)
+      break; // Exit if no more Pokémon are left for treinador1
   }
-
   setVencedor(treinadores);
   printOverview(treinadores);
 }
