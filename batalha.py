@@ -1,16 +1,16 @@
-from Pokemon import Treinador
+from Treinador import Treinador
 
-type dupla = tuple[Treinador, Treinador]
+type Treinadores = tuple[Treinador, Treinador]
 
 
-def set_vencedor(treinadores: dupla) -> None:
+def set_vencedor(treinadores: Treinadores) -> None:
     for treinador in treinadores:
         treinador.vencedor = False if treinador.pokemons_vivos == 0 else True
 
     return
 
 
-def print_overview(treinadores: dupla) -> None:
+def print_overview(treinadores: Treinadores) -> None:
 
     for i, treinador in enumerate(treinadores, start=1):
         if not treinador.vencedor:
@@ -29,15 +29,14 @@ def print_overview(treinadores: dupla) -> None:
                 print(pokemon.nome)
 
 
-def Batalha(treinadores: dupla) -> None:
+def Batalha(treinadores: Treinadores) -> None:
     treinador1, treinador2 = treinadores
 
     i, j = 0, 0
     pokemon1 = treinador1.pokemons[i]
     pokemon2 = treinador2.pokemons[j]
 
-    # while treinador1.pokemons_vivos and treinador2.pokemons_vivos:
-    while i < treinador1.pokemons_total and j < treinador2.pokemons_total:
+    while True:
 
         pokemon1.atacar(pokemon2)
         if pokemon2.vida <= 0:
