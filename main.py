@@ -6,9 +6,7 @@ def main():
     arquivo = "treinadores.txt"
 
     treinadores = lerTreinadores(arquivo)
-    # for treinador in treinadores:
-    #     print(len(treinador.pokemons))
-    # exit(0)
+
     Batalha(treinadores)
 
 
