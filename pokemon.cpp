@@ -39,10 +39,10 @@ std::string Pokemon::getSuperEfetividade(void) {
 float Pokemon::getAtaqueMultiplier(const Pokemon &outro) {
   float multiplier = 1;
 
-  if (this->superEfetivo == outro.superEfetivo)
+  if (this->superEfetivo == outro.tipo)
     multiplier = 1.2;
 
-  if (outro.superEfetivo == this->superEfetivo)
+  if (outro.superEfetivo == this->tipo)
     multiplier = 0.8;
 
   return multiplier;
