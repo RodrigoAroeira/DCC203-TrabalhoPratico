@@ -25,12 +25,12 @@ public:
   }
 
 private:
-  std::string nome;
-  float ataque;
-  float defesa;
+  const std::string nome;
+  const float ataque;
+  const float defesa;
   float vida;
-  std::string tipo;
-  std::string superEfetivo;
+  const std::string tipo;
+  const std::string superEfetivo;
 
 private:
   float getAtaqueMultiplier(const Pokemon &outro);
