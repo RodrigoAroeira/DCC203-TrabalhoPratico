@@ -3,6 +3,7 @@
 #include "pokemon.hpp"
 
 #include <array>
+#include <cstddef>
 #include <vector>
 
 class Treinador {
@@ -16,8 +17,8 @@ public:
 
 public:
   std::vector<Pokemon> pokemons;
-  int pokemonsVivos;
-  int pokemonsTotal;
+  size_t pokemonsVivos;
+  size_t pokemonsTotal;
 
 private:
   bool m_vencedor;
