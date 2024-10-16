@@ -71,3 +71,5 @@ void printInstruct(const std::string nomeArquivo) {
 
   arquivo.close();
 }
+
+void parseArgs() {}
