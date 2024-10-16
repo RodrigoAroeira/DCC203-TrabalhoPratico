@@ -9,8 +9,10 @@ CXXFLAGS= -I$(HEADER_DIR) -std=c++11
 
 ifeq ($(OS),Windows_NT)
     RM = cmd /C del /Q
+    EXEC=$(OUTPUT)
 else
     RM = rm -f
+    EXEC=./$(OUTPUT)
 endif
 
 compile:
@@ -20,6 +22,6 @@ clean:
 	$(RM) $(OUTPUT)
 
 execute:
-    ./$(OUTPUT)
+	$(EXEC)
 
 .PHONY: compile clean execute
