@@ -7,13 +7,19 @@ OUTPUT = Pokemon.exe
 
 CXXFLAGS= -I$(HEADER_DIR) -std=c++11
 
+ifeq ($(OS),Windows_NT)
+    RM = cmd /C del /Q
+else
+    RM = rm -f
+endif
+
 compile:
 	g++ $(CXXFLAGS) $(SRC_FILES) -o $(OUTPUT)
 
 clean:
-	rm -f $(OUTPUT)
+	$(RM) $(OUTPUT)
 
 execute:
-	./$(OUTPUT)
+    ./$(OUTPUT)
 
 .PHONY: compile clean execute
