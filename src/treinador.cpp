@@ -2,9 +2,6 @@
 #include <array>
 #include <iostream>
 
-void Treinador::makeVencedor(void) { m_vencedor = true; }
-bool Treinador::isVencedor(void) { return m_vencedor; }
-
 void setVencedor(std::array<Treinador, 2> &treinadores) {
   /*Função para facilitar a checagem de pokemons vivos ao final*/
   for (auto &treinador : treinadores) {

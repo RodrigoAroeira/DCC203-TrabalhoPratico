@@ -12,8 +12,8 @@ public:
       : pokemons(pokemons), pokemonsVivos(pokemons.size()),
         pokemonsTotal(pokemons.size()), m_vencedor(false) {}
 
-  void makeVencedor(void);
-  bool isVencedor(void);
+  void makeVencedor(void) { m_vencedor = true; }
+  bool isVencedor(void) { return m_vencedor; }
 
 public:
   std::vector<Pokemon> pokemons;
