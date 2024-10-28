@@ -19,8 +19,13 @@ public:
   std::string getTipo() const;
   std::string getSuperEfetivo() const;
 
-  friend std::ostream &operator<<(std::ostream &os, const Pokemon &pokemon) {
-    os << pokemon.nome + " - " << pokemon.getVida();
+  inline friend std::ostream &operator<<(std::ostream &os, const Pokemon &pokemon) {
+    os << "Nome: " << pokemon.getNome() << "\n";
+    os << "Ataque: " << pokemon.getAtaque() << "\n";
+    os << "Defesa: " << pokemon.getDefesa() << "\n";
+    os << "Vida: " << pokemon.getVida() << "\n";
+    os << "Tipo: " << pokemon.getTipo() << "\n";
+    os << "Super Efetivo contra: " << pokemon.getSuperEfetivo();
     return os;
   }
 

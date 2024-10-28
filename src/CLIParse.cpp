@@ -42,13 +42,7 @@ void printTreinadores(const std::array<Treinador, 2> &treinadores) {
     const Treinador &treinador = treinadores[i];
     for (auto &pokemon : treinador.pokemons) {
       std::cout << "-----------------\n";
-      std::cout << "Nome: " << pokemon.getNome() << "\n";
-      std::cout << "Ataque: " << pokemon.getAtaque() << "\n";
-      std::cout << "Defesa: " << pokemon.getDefesa() << "\n";
-      std::cout << "Vida: " << pokemon.getVida() << "\n";
-      std::cout << "Tipo: " << pokemon.getTipo() << "\n";
-      std::cout << "Super Efetivo contra: " << pokemon.getSuperEfetivo()
-                << "\n";
+      std::cout << pokemon << std::endl;
       std::cout << "-----------------" << std::endl;
     }
   }
