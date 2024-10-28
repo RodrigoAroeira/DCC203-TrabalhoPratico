@@ -21,7 +21,7 @@ std::vector<Pokemon> getPokemonInfo(std::ifstream &arq, size_t size) {
   return vec;
 }
 
-std::array<Treinador, 2> lerTreinadores(const std::string nomeArq) {
+std::array<Treinador, 2> lerTreinadores(const std::string &nomeArq) {
   std::ifstream arquivo(nomeArq);
 
   if (!arquivo.is_open()) {
