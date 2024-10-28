@@ -15,20 +15,18 @@ struct option long_options[] = {{"help", no_argument, nullptr, 'h'},
                                 {nullptr, 0, nullptr, 0}};
 
 void help(const std::string nomeArquivo) {
-  std::cout << "Modo de uso: " << nomeArquivo << " [OPTION]\n";
-  std::cout << "Options:\n";
-  std::cout << "  --help                "
-            << "Mostra essa mensagem e sai do programa.\n";
-  std::cout << "  --print               "
-            << "Imprime os treinadores e sai do programa.\n";
-  std::cout << "  --custom [arquivo]    "
-            << "Lê de um arquivo .txt com um nome da sua escolha.\n";
-  std::cout
-      << "  --exemplo             "
-      << "Roda a batalha de exemplo. Funciona como --custom exemplo.txt\n";
-  std::cout << "  --instruct            "
+  std::cout << "Modo de uso: " << nomeArquivo << " [OPTION]\n"
+            << "Options:\n"
+            << std::left << std::setw(25) << "  --help"
+            << "Mostra essa mensagem e sai do programa.\n"
+            << std::left << std::setw(25) << "  --print"
+            << "Imprime os treinadores e sai do programa.\n"
+            << std::left << std::setw(25) << "  --custom [arquivo]"
+            << "Lê de um arquivo .txt com um nome da sua escolha.\n"
+            << std::left << std::setw(25) << "  --exemplo"
+            << "Roda a batalha de exemplo. Funciona como --custom exemplo.txt\n"
+            << std::left << std::setw(25) << "  --instruct"
             << "Imprime as instruções de uso do programa e sai do programa.\n";
-
   exit(0);
 }
 
