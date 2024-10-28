@@ -1,11 +1,14 @@
-#include "pokemon.hpp"
-#include "treinador.hpp"
 #include <array>
 #include <fstream>
 #include <getopt.h>
+#include <iomanip>
 #include <iostream>
 #include <locale>
 #include <string>
+
+#include "pokemon.hpp"
+#include "treinador.hpp"
+#include "utils.hpp"
 
 struct option long_options[] = {{"help", no_argument, nullptr, 'h'},
                                 {"exemplo", no_argument, nullptr, 'e'},
@@ -54,7 +57,7 @@ void printTreinadores(const std::array<Treinador, 2> &treinadores) {
 }
 
 void printInstruct(const std::string nomeArquivo) {
-  std::locale::global(std::locale("")); // Configuração para suportar UTF-8
+  std::locale::global(std::locale(""));
 
   std::ifstream arquivo(nomeArquivo);
   if (!arquivo.is_open()) {
@@ -63,11 +66,49 @@ void printInstruct(const std::string nomeArquivo) {
   }
 
   std::string buffer;
-  while (std::getline(arquivo, buffer)) { // Ler linha por linha
+  while (std::getline(arquivo, buffer)) {
     std::cout << buffer << '\n';
   }
 
   arquivo.close();
 }
 
-void parseArgs() {}
+void parseArgs(int argc, char *argv[]) {
+  int opt;
+  int opt_index = 0;
+  std::string arquivo = "treinadores.txt";
+
+  bool printFlag = false, batalhaFlag = true;
+
+  while ((opt = getopt_long(argc, argv, "hec:p", long_options, &opt_index)) !=
+         -1) {
+    switch (opt) {
+    case 'h':
+      help(argv[0]);
+      break;
+    case 'e':
+      arquivo = "exemplo.txt";
+      break;
+    case 'c':
+      arquivo = optarg;
+      break;
+    case 'p':
+      printFlag = true;
+      batalhaFlag = false;
+      break;
+    case 'i':
+      printInstruct("instrucoes.txt");
+      return;
+    default:
+      break;
+    }
+  }
+
+  auto treinadores = lerTreinadores(arquivo);
+
+  if (printFlag)
+    printTreinadores(treinadores);
+
+  if (batalhaFlag)
+    Batalha(treinadores);
+}
