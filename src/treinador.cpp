@@ -10,30 +10,33 @@ void setVencedor(std::array<Treinador, 2> &treinadores) {
   }
 }
 
-void printOverview(std::array<Treinador, 2> &treinadores) {
-
-  for (int i = 0; i < treinadores.size(); i++) {
-    Treinador &treinador = treinadores[i];
-
-    if (!treinador.isVencedor())
-      continue;
-
-    std::cout << "Jogador " << i + 1 << " venceu\n";
-    std::cout << "Pokemons sobreviventes:\n";
-    for (auto &pokemon : treinador.pokemons) {
-      if (pokemon.getVida() > 0) {
-        std::cout << pokemon.getNome() + '\n';
-      }
+void printVencedor(const Treinador &treinador, int index) {
+  std::cout << "Jogador " << index + 1 << " venceu\n";
+  std::cout << "Pokemons sobreviventes:\n";
+  for (const auto &pokemon : treinador.pokemons) {
+    if (pokemon.getVida() > 0) {
+      std::cout << pokemon.getNome() << '\n';
     }
   }
+}
 
+void printPokemonDerrotados(const std::array<Treinador, 2> &treinadores) {
   std::cout << "Pokemons derrotados:\n";
-  for (auto &treinador : treinadores) {
-    for (auto &pokemon : treinador.pokemons) {
+  for (const auto &treinador : treinadores)
+    for (const auto &pokemon : treinador.pokemons)
+
       if (pokemon.getVida() <= 0)
         std::cout << pokemon.getNome() << std::endl;
+}
+
+void printOverview(std::array<Treinador, 2> &treinadores) {
+  for (int i = 0; i < treinadores.size(); i++) {
+    Treinador &treinador = treinadores[i];
+    if (treinador.isVencedor()) {
+      printVencedor(treinador, i);
     }
   }
+  printPokemonDerrotados(treinadores);
 }
 
 void processarAtaque(Pokemon *atacante, Pokemon *defesa, int &indiceDefesa,
