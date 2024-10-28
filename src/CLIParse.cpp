@@ -17,7 +17,7 @@ struct option long_options[] = {{"help", no_argument, nullptr, 'h'},
                                 {"instruct", no_argument, nullptr, 'i'},
                                 {nullptr, 0, nullptr, 0}};
 
-void help(const std::string nomeArquivo) {
+void help(const std::string &nomeArquivo) {
   std::cout << "Modo de uso: " << nomeArquivo << " [OPTION]\n"
             << "Options:\n"
             << std::left << std::setw(25) << "  --help"
@@ -50,7 +50,7 @@ void printTreinadores(const std::array<Treinador, 2> &treinadores) {
   std::cout << "\033[0m";
 }
 
-void printInstruct(const std::string nomeArquivo) {
+void printInstruct(const std::string &nomeArquivo) {
   std::locale::global(std::locale(""));
 
   std::ifstream arquivo(nomeArquivo);

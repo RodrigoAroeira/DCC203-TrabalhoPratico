@@ -5,8 +5,8 @@
 
 class Pokemon {
 public:
-  Pokemon(std::string nome, float ataque, float defesa, float vida,
-          std::string tipo)
+  Pokemon(const std::string &nome, float ataque, float defesa, float vida,
+          const std::string &tipo)
       : nome(std::move(nome)), ataque(ataque), defesa(defesa), vida(vida),
         tipo(std::move(tipo)), superEfetivo(getSuperEfetividade()) {}
 

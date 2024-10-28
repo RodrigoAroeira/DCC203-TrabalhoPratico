@@ -8,8 +8,8 @@
 
 class Treinador {
 public:
-  Treinador(std::vector<Pokemon> pokemons)
-      : pokemons(pokemons), pokemonsVivos(pokemons.size()),
+  Treinador(const std::vector<Pokemon> &pokemons)
+      : pokemons(std::move(pokemons)), pokemonsVivos(pokemons.size()),
         pokemonsTotal(pokemons.size()), m_vencedor(false) {}
 
   void makeVencedor(void) { m_vencedor = true; }
