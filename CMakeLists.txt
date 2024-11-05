@@ -25,9 +25,29 @@ file(GLOB FILES_TO_LINK
     ${CMAKE_SOURCE_DIR}/instrucoes.txt
 )
 
+# Function to create a link (hardlink on Windows, symlink on other platforms)
+function(create_link source target)
+  if(WIN32)
+    execute_process(
+      COMMAND ${CMAKE_COMMAND} -E create_hardlink ${target} ${source}
+      RESULT_VARIABLE result
+    )
+  else()
+    execute_process(
+      COMMAND ${CMAKE_COMMAND} -E create_symlink ${source} ${target}
+      RESULT_VARIABLE result
+    )
+  endif()
+
+  if(NOT result EQUAL 0)
+    message(FATAL_ERROR "Failed to create link from ${source} to ${target}")
+  endif()
+endfunction()
+
+# Iterate over files and create links
 foreach(FILE ${FILES_TO_LINK})
   get_filename_component(FILENAME ${FILE} NAME)
-  execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${FILE} ${CMAKE_BINARY_DIR}/${FILENAME})
+  create_link(${FILE} ${CMAKE_BINARY_DIR}/${FILENAME})
 endforeach()
 
 add_custom_target(run
@@ -46,5 +66,4 @@ add_custom_target(tests
   COMMAND TestPokemon
   WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
 )
-
 set_target_properties(TestPokemon PROPERTIES EXCLUDE_FROM_ALL TRUE)
