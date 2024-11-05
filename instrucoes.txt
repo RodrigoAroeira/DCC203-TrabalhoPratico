@@ -1,0 +1,34 @@
+Bem vindo ao Simulador de Batalhas Pokemon!
+
+
+Para executar o programa, você deve rodá-lo pelo terminal, pela linha de comando.
+
+Por padrão, o programa irá procurar por um arquivo chamado "treinadores.txt", onde estarão quantos e quais
+Pokemons cada treinador terá. Para usar um arquivo com outro nome, utilize '--custom [NOME DO ARQUIVO]' na linha de comando.
+
+O arquivo deve seguir a seguinte estrutura:
+
+M N
+Pokemon 1 Ataque Defesa Vida Tipo
+.
+.
+.
+Pokemon M Ataque Defesa Vida Tipo
+Pokemon 1 Ataque Defesa Vida Tipo
+.
+.
+.
+Pokemon N Ataque Defesa Vida Tipo
+
+M e N são a quantidade de Pokemons do Treinador 1 e 2, respectivamente. Devem ser um numero positivo menor ou igual a 100.
+
+"Ataque", "Defesa" e "Vida" devem ser números inteiros.
+
+"Tipo" deve ser um dos tipos de Pokemon contido em:
+{"eletrico", "agua", "fogo", "gelo", "pedra"}, sem as aspas, e sempre sem acentos e em letra minuscula.
+
+Para mais duvidas, digite '--help' na linha de comando.
+
+Para compilar o arquivo, use o comando 'cmake' ou 'g++ *.cpp -o [NOME DESEJADO]'
+
+Divirta-se batalhando!
