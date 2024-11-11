@@ -19,51 +19,36 @@ add_library(PokemonLib STATIC ${SRC_FILES})
 add_executable(Pokemon src/main.cpp)
 target_link_libraries(Pokemon PokemonLib)
 
-file(GLOB FILES_TO_LINK
-    ${CMAKE_SOURCE_DIR}/treinadores.txt
-    ${CMAKE_SOURCE_DIR}/exemplo.txt
-    ${CMAKE_SOURCE_DIR}/instrucoes.txt
-)
-
-# Function to create a link (hardlink on Windows, symlink on other platforms)
-function(create_link source target)
-  if(WIN32)
-    execute_process(
-      COMMAND ${CMAKE_COMMAND} -E create_hardlink ${target} ${source}
-      RESULT_VARIABLE result
-    )
-  else()
-    execute_process(
-      COMMAND ${CMAKE_COMMAND} -E create_symlink ${source} ${target}
-      RESULT_VARIABLE result
-    )
-  endif()
-
-  if(NOT result EQUAL 0)
-    message(FATAL_ERROR "Failed to create link from ${source} to ${target}")
-  endif()
-endfunction()
+file(GLOB FILES_TO_LINK ${CMAKE_SOURCE_DIR}/treinadores.txt
+     ${CMAKE_SOURCE_DIR}/exemplo.txt ${CMAKE_SOURCE_DIR}/instrucoes.txt)
 
 # Iterate over files and create links
 foreach(FILE ${FILES_TO_LINK})
   get_filename_component(FILENAME ${FILE} NAME)
-  create_link(${FILE} ${CMAKE_BINARY_DIR}/${FILENAME})
+  execute_process(
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${FILE}
+            ${CMAKE_BINARY_DIR}/${FILENAME} RESULT_VARIABLE result)
+
+  if(NOT result EQUAL 0)
+    # Been having problems with links on windows
+    file(COPY ${FILE} DESTINATION ${CMAKE_BINARY_DIR})
+  endif()
 endforeach()
 
-add_custom_target(run
+add_custom_target(
+  run
   COMMAND Pokemon
   DEPENDS Pokemon
-  WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
-)
+  WORKING_DIRECTORY ${CMAKE_PROJECT_DIR})
 
 file(GLOB TEST_FILES "tests/*.cpp")
 add_executable(TestPokemon ${TEST_FILES})
 include_directories("tests")
 target_link_libraries(TestPokemon PokemonLib)
 
-add_custom_target(tests
+add_custom_target(
+  tests
   DEPENDS TestPokemon
   COMMAND TestPokemon
-  WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
-)
+  WORKING_DIRECTORY ${CMAKE_PROJECT_DIR})
 set_target_properties(TestPokemon PROPERTIES EXCLUDE_FROM_ALL TRUE)
