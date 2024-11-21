@@ -2,10 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project("Pokemon")
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 file(GLOB SRC_FILES "src/*.cpp")
 list(REMOVE_ITEM SRC_FILES "${CMAKE_SOURCE_DIR}/src/main.cpp")
@@ -51,4 +49,5 @@ add_custom_target(
   DEPENDS TestPokemon
   COMMAND TestPokemon
   WORKING_DIRECTORY ${CMAKE_PROJECT_DIR})
+
 set_target_properties(TestPokemon PROPERTIES EXCLUDE_FROM_ALL TRUE)
