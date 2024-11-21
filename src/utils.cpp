@@ -1,44 +1,46 @@
 #include "utils.hpp"
-#include "pokemon.hpp"
+
 #include <array>
 #include <fstream>
 #include <iostream>
 #include <vector>
 
-std::vector<Pokemon> getPokemonInfo(std::ifstream &arq, size_t size) {
+#include "pokemon.hpp"
+
+std::vector<Pokemon> getPokemonInfo(std::ifstream &file, size_t size) {
 
   std::vector<Pokemon> vec;
   vec.reserve(size);
 
   for (size_t i = 0; i < size; i++) {
-    std::string nome, tipo;
-    float ataque, defesa, vida;
+    std::string name, type;
+    float attack, defense, hp;
 
-    arq >> nome >> ataque >> defesa >> vida >> tipo;
+    file >> name >> attack >> defense >> hp >> type;
 
-    vec.emplace_back(nome, ataque, defesa, vida, tipo);
+    vec.emplace_back(name, attack, defense, hp, type);
   }
   return vec;
 }
 
-std::array<Treinador, 2> lerTreinadores(const std::string &nomeArq) {
-  std::ifstream arquivo(nomeArq);
+std::array<Trainer, 2> readTrainers(const std::string &filename) {
+  std::ifstream file(filename);
 
-  if (!arquivo.is_open()) {
-    std::cerr << "Falha ao abrir o arquivo " << nomeArq << ", tente novamente."
+  if (!file.is_open()) {
+    std::cerr << "Failed to open the file " << filename << ", please try again."
               << std::endl;
     exit(1);
   }
 
   int totalPokemons1, totalPokemons2;
 
-  arquivo >> totalPokemons1 >> totalPokemons2;
+  file >> totalPokemons1 >> totalPokemons2;
 
-  std::vector<Pokemon> pokemons1 = getPokemonInfo(arquivo, totalPokemons1);
-  std::vector<Pokemon> pokemons2 = getPokemonInfo(arquivo, totalPokemons2);
+  std::vector<Pokemon> pokemons1 = getPokemonInfo(file, totalPokemons1);
+  std::vector<Pokemon> pokemons2 = getPokemonInfo(file, totalPokemons2);
 
-  Treinador t1(pokemons1);
-  Treinador t2(pokemons2);
+  Trainer t1(pokemons1);
+  Trainer t2(pokemons2);
 
   return {t1, t2};
 }

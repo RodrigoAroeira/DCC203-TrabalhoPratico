@@ -31,7 +31,7 @@ foreach(FILE ${FILES_TO_LINK})
     # Been having problems with links on windows
     file(COPY ${FILE} DESTINATION ${CMAKE_BINARY_DIR})
     get_filename_component(DIR ${CMAKE_BINARY_DIR} NAME)
-    message(STATUS "Symlink falhou, copiando arquivo ${FILENAME} para ${DIR}")
+    message(STATUS "Symlink failed, copying file `${FILENAME}` para `${DIR}`")
   endif()
 endforeach()
 

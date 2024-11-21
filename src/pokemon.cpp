@@ -1,48 +1,49 @@
 #include "pokemon.hpp"
+
+#include <iostream>
 #include <string>
 
 // Public Methods
 
-void Pokemon::Atacar(Pokemon &outro) const {
-  float multiplier = getAtaqueMultiplier(outro);
-  float dano = m_ataque * multiplier - outro.m_defesa;
+void Pokemon::Attack(Pokemon &other) const {
+  float multiplier = getAttackMultiplier(other);
+  float dmg = m_attack * multiplier - other.m_defense;
 
-  if (dano <= 0)
-    dano = 1;
+  if (dmg <= 0)
+    dmg = 1;
 
-  outro.m_vida -= dano;
+  other.m_HP -= dmg;
 }
 
-std::string Pokemon::getNome() const { return m_nome; }
-float Pokemon::getAtaque() const { return m_ataque; }
-float Pokemon::getDefesa() const { return m_defesa; }
-float Pokemon::getVida() const { return m_vida; }
-std::string Pokemon::getTipo() const { return m_tipo; }
-std::string Pokemon::getSuperEfetivo() const { return m_superEfetivo; }
+std::string Pokemon::getName() const { return m_name; }
+float Pokemon::getAttack() const { return m_attack; }
+float Pokemon::getDefense() const { return m_defense; }
+float Pokemon::getHP() const { return m_HP; }
+std::string Pokemon::getType() const { return m_type; }
+std::string Pokemon::getSuperEffective() const { return m_superEffective; }
 
 // Private Methods
 
-std::string Pokemon::getSuperEfetividade(void) const {
-  std::string tipos[] = {"eletrico", "agua", "fogo", "gelo", "pedra"};
-  std::string contraTipos[] = {"agua", "fogo", "gelo", "pedra", "eletrico"};
+std::string Pokemon::defineSuperEffective(void) const {
+  std::string types[] = {"electric", "water", "fire", "ice", "rock"};
+  std::string counterTypes[] = {"water", "fire", "ice", "rock", "electric"};
 
-  std::string selected;
   for (int i = 0; i < 5; i++) {
-    if (m_tipo == tipos[i])
-      return contraTipos[i];
+    if (m_type == types[i])
+      return counterTypes[i];
   }
-  printf("Tipo '%s' não encontrado, saindo do programa.\n",
-         m_tipo.c_str()); // No caso do tipo não ser encontrado.
+  std::cerr << "Type '" << m_type << "' not found, leaving program."
+            << std::endl;
   exit(1);
 }
 
-float Pokemon::getAtaqueMultiplier(const Pokemon &outro) const {
+float Pokemon::getAttackMultiplier(const Pokemon &outro) const {
   float multiplier = 1;
 
-  if (this->m_superEfetivo == outro.m_tipo)
+  if (this->m_superEffective == outro.m_type)
     multiplier = 1.2;
 
-  if (outro.m_superEfetivo == this->m_tipo)
+  if (outro.m_superEffective == this->m_type)
     multiplier = 0.8;
 
   return multiplier;

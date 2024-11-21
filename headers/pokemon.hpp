@@ -5,41 +5,39 @@
 
 class Pokemon {
 public:
-  Pokemon(const std::string &nome, float ataque, float defesa, float vida,
-          const std::string &tipo)
-      : m_nome(std::move(nome)), m_ataque(ataque), m_defesa(defesa),
-        m_vida(vida), m_tipo(std::move(tipo)),
-        m_superEfetivo(getSuperEfetividade()) {}
+  Pokemon(const std::string &name, float attack, float defense, float hp,
+          const std::string &type)
+      : m_name(std::move(name)), m_attack(attack), m_defense(defense), m_HP(hp),
+        m_type(std::move(type)), m_superEffective(getSuperEffective()) {}
 
-  void Atacar(Pokemon &outro) const;
+  void Attack(Pokemon &outro) const;
 
-  std::string getNome() const;
-  float getAtaque() const;
-  float getDefesa() const;
-  float getVida() const;
-  std::string getTipo() const;
-  std::string getSuperEfetivo() const;
+  std::string getName() const;
+  float getAttack() const;
+  float getDefense() const;
+  float getHP() const;
+  std::string getType() const;
+  std::string getSuperEffective() const;
 
-  inline friend std::ostream &operator<<(std::ostream &os,
-                                         const Pokemon &pokemon) {
-    os << "Nome: " << pokemon.getNome() << "\n";
-    os << "Ataque: " << pokemon.getAtaque() << "\n";
-    os << "Defesa: " << pokemon.getDefesa() << "\n";
-    os << "Vida: " << pokemon.getVida() << "\n";
-    os << "Tipo: " << pokemon.getTipo() << "\n";
-    os << "Super Efetivo contra: " << pokemon.getSuperEfetivo();
+  friend std::ostream &operator<<(std::ostream &os, const Pokemon &pokemon) {
+    os << "Name: " << pokemon.getName() << "\n";
+    os << "Attack: " << pokemon.getAttack() << "\n";
+    os << "Defense: " << pokemon.getDefense() << "\n";
+    os << "HP: " << pokemon.getHP() << "\n";
+    os << "Type: " << pokemon.getType() << "\n";
+    os << "Super Effective against: " << pokemon.getSuperEffective();
     return os;
   }
 
 private:
-  const std::string m_nome;
-  const float m_ataque;
-  const float m_defesa;
-  float m_vida;
-  const std::string m_tipo;
-  const std::string m_superEfetivo;
+  const std::string m_name;
+  const float m_attack;
+  const float m_defense;
+  float m_HP;
+  const std::string m_type;
+  const std::string m_superEffective;
 
 private:
-  float getAtaqueMultiplier(const Pokemon &outro) const;
-  std::string getSuperEfetividade() const;
+  float getAttackMultiplier(const Pokemon &outro) const;
+  std::string defineSuperEffective() const;
 };

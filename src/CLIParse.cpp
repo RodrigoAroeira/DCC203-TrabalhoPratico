@@ -1,20 +1,74 @@
+#include "CLIParse.hpp"
+
+#include <getopt.h>
+
 #include <array>
 #include <fstream>
-#include <getopt.h>
 #include <iomanip>
 #include <iostream>
 #include <locale>
 #include <string>
 
-#include "CLIParse.hpp"
 #include "pokemon.hpp"
-#include "treinador.hpp"
+#include "trainer.hpp"
 #include "utils.hpp"
 
+[[noreturn]] void help(const std::string &filename) {
+
+#define PAD_LEFT std::left << std::setw(25)
+  std::cout << "Usage: " << filename << " [OPTION]\n"
+            << "Options:\n"
+            << PAD_LEFT << "  --help, -h"
+            << "Displays this message and exits the program.\n"
+            << PAD_LEFT << "  --print, -p"
+            << "Prints the trainers and exits the program.\n"
+            << PAD_LEFT << "  --custom, -c [file]"
+            << "Reads from a .txt file with a name of your choice.\n"
+            << PAD_LEFT << "  --example, -e"
+            << "Runs the example battle. Works like --custom example.txt\n"
+            << PAD_LEFT << "  --instruct, -i "
+            << "Prints the program usage instructions and exits the program.\n";
+  exit(0);
+}
+
+void printTrainers(const std::array<Trainer, 2> &trainers) {
+  const std::string colors[] = {"\033[32m", "\033[31m"};
+
+  for (size_t i = 0; i < trainers.size(); ++i) {
+    std::cout << colors[i];
+    std::cout << "Trainer " << (i + 1) << std::endl;
+    const Trainer &trainer = trainers[i];
+    for (auto &pokemon : trainer.pokemons) {
+      std::cout << "-----------------" << std::endl;
+      std::cout << pokemon << std::endl;
+      std::cout << "-----------------" << std::endl;
+    }
+  }
+
+  std::cout << "\033[0m";
+}
+
+[[noreturn]] void printInstruct(const std::string &filename) {
+  std::locale::global(std::locale(""));
+
+  std::ifstream file(filename);
+  if (!file.is_open()) {
+    std::cerr << "Error opening the file." << std::endl;
+    exit(1);
+  }
+
+  std::string buffer;
+  while (std::getline(file, buffer)) {
+    std::cout << buffer << '\n';
+  }
+
+  exit(0);
+}
+
 template <size_t size>
-std::string createShortOpts(const std::array<option, size> long_options) {
+std::string generateShortOpts(const std::array<option, size> longOpts) {
   std::string shortOpts;
-  for (const option &opt : long_options) {
+  for (const option &opt : longOpts) {
     if (!opt.name)
       continue;
     shortOpts += opt.val;
@@ -24,59 +78,9 @@ std::string createShortOpts(const std::array<option, size> long_options) {
   return shortOpts;
 }
 
-[[noreturn]] void help(const std::string &nomeArquivo) {
-  std::cout << "Modo de uso: " << nomeArquivo << " [OPTION]\n"
-            << "Options:\n"
-            << std::left << std::setw(25) << "  --help, -h"
-            << "Mostra essa mensagem e sai do programa.\n"
-            << std::left << std::setw(25) << "  --print, -p"
-            << "Imprime os treinadores e sai do programa.\n"
-            << std::left << std::setw(25) << "  --custom, -c [arquivo]"
-            << "Lê de um arquivo .txt com um nome da sua escolha.\n"
-            << std::left << std::setw(25) << "  --exemplo, -e"
-            << "Roda a batalha de exemplo. Funciona como --custom exemplo.txt\n"
-            << std::left << std::setw(25) << "  --instruct, -i "
-            << "Imprime as instruções de uso do programa e sai do programa.\n";
-  exit(0);
-}
-
-void printTreinadores(const std::array<Treinador, 2> &treinadores) {
-  const std::string colors[] = {"\033[32m", "\033[31m"};
-
-  for (size_t i = 0; i < treinadores.size(); ++i) {
-    std::cout << colors[i];
-    std::cout << "Treinador " << (i + 1) << "\n";
-    const Treinador &treinador = treinadores[i];
-    for (auto &pokemon : treinador.pokemons) {
-      std::cout << "-----------------\n";
-      std::cout << pokemon << std::endl;
-      std::cout << "-----------------" << std::endl;
-    }
-  }
-
-  std::cout << "\033[0m";
-}
-
-[[noreturn]] void printInstruct(const std::string &nomeArquivo) {
-  std::locale::global(std::locale(""));
-
-  std::ifstream arquivo(nomeArquivo);
-  if (!arquivo.is_open()) {
-    perror("Erro ao abrir o arquivo");
-    exit(1);
-  }
-
-  std::string buffer;
-  while (std::getline(arquivo, buffer)) {
-    std::cout << buffer << '\n';
-  }
-
-  exit(0);
-}
-
-auto long_options =
+auto longOpts =
     std::to_array<option>({{"help", no_argument, nullptr, 'h'},
-                           {"exemplo", no_argument, nullptr, 'e'},
+                           {"example", no_argument, nullptr, 'e'},
                            {"custom", required_argument, nullptr, 'c'},
                            {"print", no_argument, nullptr, 'p'},
                            {"instruct", no_argument, nullptr, 'i'},
@@ -84,30 +88,30 @@ auto long_options =
 
 void parseArgs(int argc, char *argv[]) {
   int opt;
-  int opt_index = 0;
-  std::string arquivo = "treinadores.txt";
+  int optIdx = 0;
+  std::string file = "trainers.txt";
 
-  bool printFlag = false, batalhaFlag = true;
-  std::string shortOpts = createShortOpts(long_options);
+  bool printFlag = false, battleFlag = true;
+  std::string shortOpts = generateShortOpts(longOpts);
 
-  while ((opt = getopt_long(argc, argv, shortOpts.c_str(), long_options.data(),
-                            &opt_index)) != -1) {
+  while ((opt = getopt_long(argc, argv, shortOpts.c_str(), longOpts.data(),
+                            &optIdx)) != -1) {
     switch (opt) {
     case 'h':
       help(argv[0]);
       break;
     case 'e':
-      arquivo = "exemplo.txt";
+      file = "example.txt";
       break;
     case 'c':
-      arquivo = optarg;
+      file = optarg;
       break;
     case 'p':
       printFlag = true;
-      batalhaFlag = false;
+      battleFlag = false;
       break;
     case 'i':
-      printInstruct("instrucoes.txt");
+      printInstruct("instructions.txt");
       break;
     default:
       help(argv[0]);
@@ -115,11 +119,11 @@ void parseArgs(int argc, char *argv[]) {
     }
   }
 
-  auto treinadores = lerTreinadores(arquivo);
+  auto trainers = readTrainers(file);
 
   if (printFlag)
-    printTreinadores(treinadores);
+    printTrainers(trainers);
 
-  if (batalhaFlag)
-    Batalha(treinadores);
+  if (battleFlag)
+    Battle(trainers);
 }
