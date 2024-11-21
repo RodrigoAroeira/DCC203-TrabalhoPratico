@@ -25,11 +25,13 @@ foreach(FILE ${FILES_TO_LINK})
   get_filename_component(FILENAME ${FILE} NAME)
   execute_process(
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${FILE}
-            ${CMAKE_BINARY_DIR}/${FILENAME} RESULT_VARIABLE result)
+            ${CMAKE_BINARY_DIR}/${FILENAME} RESULT_VARIABLE result ERROR_QUIET)
 
   if(NOT result EQUAL 0)
     # Been having problems with links on windows
     file(COPY ${FILE} DESTINATION ${CMAKE_BINARY_DIR})
+    get_filename_component(DIR ${CMAKE_BINARY_DIR} NAME)
+    message(STATUS "Symlink falhou, copiando arquivo ${FILENAME} para ${DIR}")
   endif()
 endforeach()
 
