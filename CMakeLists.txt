@@ -17,8 +17,8 @@ add_library(PokemonLib STATIC ${SRC_FILES})
 add_executable(Pokemon src/main.cpp)
 target_link_libraries(Pokemon PokemonLib)
 
-file(GLOB FILES_TO_LINK ${CMAKE_SOURCE_DIR}/treinadores.txt
-     ${CMAKE_SOURCE_DIR}/exemplo.txt ${CMAKE_SOURCE_DIR}/instrucoes.txt)
+file(GLOB FILES_TO_LINK ${CMAKE_SOURCE_DIR}/trainers.txt
+     ${CMAKE_SOURCE_DIR}/example.txt ${CMAKE_SOURCE_DIR}/instructions.txt)
 
 # Iterate over files and create links
 foreach(FILE ${FILES_TO_LINK})

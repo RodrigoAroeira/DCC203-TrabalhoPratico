@@ -4,7 +4,7 @@
 #include "trainer.hpp"
 #include "utils.hpp"
 
-static std::array<Trainer, 2> treinadores = readTrainers("exemplo.txt");
+static std::array<Trainer, 2> treinadores = readTrainers("example.txt");
 
 TEST_CASE("Trainer empty") {
   Trainer t({});

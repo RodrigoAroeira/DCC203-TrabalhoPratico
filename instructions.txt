@@ -1,34 +1,34 @@
-Bem vindo ao Simulador de Batalhas Pokemon!
+Welcome to the Pokemon Battle Simulator!
 
 
-Para executar o programa, você deve rodá-lo pelo terminal, pela linha de comando.
+To run the program, you must execute it from the terminal, via the command line.
 
-Por padrão, o programa irá procurar por um arquivo chamado "treinadores.txt", onde estarão quantos e quais
-Pokemons cada treinador terá. Para usar um arquivo com outro nome, utilize '--custom [NOME DO ARQUIVO]' na linha de comando.
+By default, the program will look for a file called "trainers.txt", which will contain how many and which
+Pokemons each trainer will have. To use a file with another name, use '--custom [FILE NAME]' in the command line.
 
-O arquivo deve seguir a seguinte estrutura:
+The file must follow the following structure:
 
 M N
-Pokemon 1 Ataque Defesa Vida Tipo
+Pokemon 1 Attack Defense Health Type
 .
 .
 .
-Pokemon M Ataque Defesa Vida Tipo
-Pokemon 1 Ataque Defesa Vida Tipo
+Pokemon M Attack Defense Health Type
+Pokemon 1 Attack Defense Health Type
 .
 .
 .
-Pokemon N Ataque Defesa Vida Tipo
+Pokemon N Attack Defense Health Type
 
-M e N são a quantidade de Pokemons do Treinador 1 e 2, respectivamente. Devem ser um numero positivo menor ou igual a 100.
+M and N are the number of Pokemons of Trainer 1 and 2, respectively. They must be a positive number less than or equal to 100.
 
-"Ataque", "Defesa" e "Vida" devem ser números inteiros.
+"Attack", "Defense" and "Health" must be integers.
 
-"Tipo" deve ser um dos tipos de Pokemon contido em:
-{"eletrico", "agua", "fogo", "gelo", "pedra"}, sem as aspas, e sempre sem acentos e em letra minuscula.
+"Type" must be one of the Pokemon types contained in:
+{"electric", "water", "fire", "ice", "rock"}, without quotes, always without accents and in lowercase.
 
-Para mais duvidas, digite '--help' na linha de comando.
+For more questions, type '--help' in the command line.
 
-Para compilar o arquivo, use o comando 'cmake' ou 'g++ *.cpp -o [NOME DESEJADO]'
+To compile the file, use the command 'cmake' or 'g++ *.cpp -o [DESIRED NAME]'
 
-Divirta-se batalhando!
+Have fun battling!
