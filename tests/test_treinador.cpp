@@ -1,28 +1,28 @@
 // #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 #include "doctest.h"
-#include "treinador.hpp"
+#include "trainer.hpp"
 #include "utils.hpp"
 
-static std::array<Treinador, 2> treinadores = lerTreinadores("exemplo.txt");
+static std::array<Trainer, 2> treinadores = readTrainers("exemplo.txt");
 
-TEST_CASE("Treinador empty") {
-  Treinador t({});
+TEST_CASE("Trainer empty") {
+  Trainer t({});
   CHECK(t.pokemons.empty());
-  CHECK(t.pokemonsVivos == 0);
-  CHECK(t.pokemonsTotal == 0);
+  CHECK(t.alivePokemon == 0);
+  CHECK(t.totalPokemon == 0);
 }
 
-TEST_CASE("Treinador with pokemons") {
-  size_t pokemonsTotal =
-      treinadores[0].pokemonsTotal + treinadores[1].pokemonsTotal;
+TEST_CASE("Trainer with pokemons") {
+  size_t totalPokemon =
+      treinadores[0].totalPokemon + treinadores[1].totalPokemon;
 
-  CHECK(pokemonsTotal == 5);
+  CHECK(totalPokemon == 5);
 }
 
-TEST_CASE("Treinador winner") {
-  Treinador t({});
-  CHECK_FALSE(t.isVencedor());
-  t.makeVencedor();
-  CHECK(t.isVencedor());
+TEST_CASE("Trainer winner") {
+  Trainer t({});
+  CHECK_FALSE(t.isWinner());
+  t.makeWinner();
+  CHECK(t.isWinner());
 }
