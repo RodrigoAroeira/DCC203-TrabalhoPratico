@@ -6,11 +6,9 @@
 class Pokemon {
 public:
   Pokemon(const std::string &name, float attack, float defense, float hp,
-          const std::string &type)
-      : m_name(std::move(name)), m_attack(attack), m_defense(defense), m_HP(hp),
-        m_type(std::move(type)), m_superEffective(getSuperEffective()) {}
+          const std::string &type);
 
-  void Attack(Pokemon &outro) const;
+  void Attack(Pokemon &other) const;
 
   std::string getName() const;
   float getAttack() const;
@@ -38,6 +36,6 @@ private:
   const std::string m_superEffective;
 
 private:
-  float getAttackMultiplier(const Pokemon &outro) const;
+  float getAttackMultiplier(const Pokemon &other) const;
   std::string defineSuperEffective() const;
 };

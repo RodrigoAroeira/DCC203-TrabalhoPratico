@@ -5,6 +5,11 @@
 
 // Public Methods
 
+Pokemon::Pokemon(const std::string &name, float attack, float defense, float hp,
+                 const std::string &type)
+    : m_name(std::move(name)), m_attack(attack), m_defense(defense), m_HP(hp),
+      m_type(std::move(type)), m_superEffective(defineSuperEffective()) {}
+
 void Pokemon::Attack(Pokemon &other) const {
   float multiplier = getAttackMultiplier(other);
   float dmg = m_attack * multiplier - other.m_defense;
@@ -37,13 +42,13 @@ std::string Pokemon::defineSuperEffective(void) const {
   exit(1);
 }
 
-float Pokemon::getAttackMultiplier(const Pokemon &outro) const {
+float Pokemon::getAttackMultiplier(const Pokemon &other) const {
   float multiplier = 1;
 
-  if (this->m_superEffective == outro.m_type)
+  if (this->m_superEffective == other.m_type)
     multiplier = 1.2;
 
-  if (outro.m_superEffective == this->m_type)
+  if (other.m_superEffective == this->m_type)
     multiplier = 0.8;
 
   return multiplier;
