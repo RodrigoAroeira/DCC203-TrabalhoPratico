@@ -3,7 +3,7 @@
 
 #include "trainer.hpp"
 
-void setWinner(std::array<Trainer, 2> &trainers) {
+static void setWinner(std::array<Trainer, 2> &trainers) {
   /*Facilitates checks by the end*/
   for (auto &trainer : trainers) {
     if (trainer.alivePokemon != 0)
@@ -11,7 +11,7 @@ void setWinner(std::array<Trainer, 2> &trainers) {
   }
 }
 
-void printWinner(const Trainer &trainer, int idx) {
+static void printWinner(const Trainer &trainer, int idx) {
   std::cout << "Player " << idx + 1 << " won\n";
   std::cout << "Surviving pokemon:\n";
   for (const auto &pokemon : trainer.pokemons) {
@@ -21,7 +21,7 @@ void printWinner(const Trainer &trainer, int idx) {
   }
 }
 
-void printDefeatedPokemon(const std::array<Trainer, 2> &trainers) {
+static void printDefeatedPokemon(const std::array<Trainer, 2> &trainers) {
   std::cout << "Defeated pokemon:\n";
   for (const auto &trainer : trainers)
     for (const auto &pokemon : trainer.pokemons)
@@ -30,7 +30,7 @@ void printDefeatedPokemon(const std::array<Trainer, 2> &trainers) {
         std::cout << pokemon.getName() << std::endl;
 }
 
-void printOverview(std::array<Trainer, 2> &trainers) {
+static void printOverview(std::array<Trainer, 2> &trainers) {
   for (int i = 0; i < trainers.size(); i++) {
     Trainer &treinador = trainers[i];
     if (treinador.isWinner()) {
@@ -40,8 +40,8 @@ void printOverview(std::array<Trainer, 2> &trainers) {
   printDefeatedPokemon(trainers);
 }
 
-void processAttack(Pokemon *attacker, Pokemon *defender, int &defenderIdx,
-                   Trainer &defenderTrainer) {
+static void processAttack(Pokemon *attacker, Pokemon *defender,
+                          int &defenderIdx, Trainer &defenderTrainer) {
 
   attacker->Attack(*defender);
 

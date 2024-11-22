@@ -7,7 +7,7 @@
 
 #include "pokemon.hpp"
 
-std::vector<Pokemon> getPokemonInfo(std::ifstream &file, size_t size) {
+static std::vector<Pokemon> getPokemonInfo(std::ifstream &file, size_t size) {
 
   std::vector<Pokemon> vec;
   vec.reserve(size);
