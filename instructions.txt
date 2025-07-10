@@ -4,7 +4,7 @@ Welcome to the Pokemon Battle Simulator!
 To run the program, you must execute it from the terminal, via the command line.
 
 By default, the program will look for a file called "trainers.txt", which will contain how many and which
-Pokemons each trainer will have. To use a file with another name, use '--custom [FILE NAME]' in the command line.
+Pokemons each trainer will have. To use a file with another name, use '--file [FILE NAME]' in the command line.
 
 The file must follow the following structure:
 
@@ -29,6 +29,6 @@ M and N are the number of Pokemons of Trainer 1 and 2, respectively. They must b
 
 For more questions, type '--help' in the command line.
 
-To compile the file, use the command 'cmake' or 'g++ *.cpp -o [DESIRED NAME]'
+To compile the program, use cargo build
 
 Have fun battling!
